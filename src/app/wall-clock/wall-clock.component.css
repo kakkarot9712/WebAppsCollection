@@ -1,0 +1,45 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.clock-container {
+    width: 35rem;
+    margin: auto;
+}
+
+.dial {
+    width: 100%;
+}
+
+.niddle {
+    display: inline-block;
+    position: relative;
+    background-color: black;
+    transform-origin: bottom center;
+}
+
+.hour {
+    bottom: 32.4rem;
+    left: 17.15rem;
+    width: 0.7rem;
+    height: 10rem;
+    border-radius: 0.7rem;
+}
+
+.minute {
+    bottom: 32.4rem;
+    left: 16.35rem;
+    width: 0.4rem;
+    height: 13rem;
+    border-radius: 0.4rem;
+}
+
+.second {
+    bottom: 32.4rem;
+    left: 16.2rem;
+    width: 0.2rem;
+    height: 15rem;
+    border-radius: 0.2rem;
+}
