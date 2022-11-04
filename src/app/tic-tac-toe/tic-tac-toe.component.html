@@ -1,0 +1,17 @@
+<div class="container col-md-5">
+    <app-playernameform></app-playernameform>
+</div>
+<hr>
+<app-score-card></app-score-card>
+<hr>
+<div class="container col-md-3 text-center" style="min-height: 71vh;">
+    <div class="row" *ngFor="let num of DUMMY_ARRAY; let i = index">
+        <div class="col border border-dark w-100 cell" *ngFor="let num of DUMMY_ARRAY; let j = index">
+            <div class="text-center m-1">
+                <img src="../assets/placeholder.png" class="rounded img-fluid" alt="cross" (click)="markdown($event)" id={{(3*i)+j}}>
+            </div>
+        </div>
+    </div>
+    <button class="btn btn-primary my-3 mx-2" type="button" (click)="switchGameStateHandler()">{{gameStarted?'Stop Game':'Start Game'}}</button>
+    <button class="btn btn-primary my-3" (click)="resetAll()" [disabled]="gameStarted">End Game</button>
+</div>

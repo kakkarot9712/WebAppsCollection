@@ -1,0 +1,11 @@
+<form (ngSubmit)="onSubmitHandler(nameForm)" #nameForm="ngForm">
+    <div class="form-group mb-3">
+        <label for="player1" class="form-label"><b>Name of Player 1</b></label>
+        <input type="text" class="form-control" id="player1" name="p1" ngModel required>
+    </div>
+    <div class="form-group mb-3">
+        <label for="player2" class="form-label"><b>Name of Player 2</b></label>
+        <input type="text" class="form-control" id="player2" name="p2" ngModel required>
+    </div>
+    <button class="btn btn-primary" id="p-name-set" type="submit">Set Player Names</button>
+</form>
