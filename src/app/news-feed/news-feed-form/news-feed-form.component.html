@@ -1,0 +1,9 @@
+<form (ngSubmit)="submitForm(newsForm)" #newsForm='ngForm'>
+    <label for="category" class="form-label"><strong>Availabel Categories</strong></label>
+    <select name="category" class='form-select mb-3' id="category" ngModel="general" required>
+        <option *ngFor="let category of categories; let i = index" value='{{ category }}'> {{ category.toUpperCase() }} </option>
+    </select>
+    <label for="query" class="form-label"><strong>Search With Custom Query (Optional)</strong></label>
+    <input type="text" class="form-control mb-3" name="query" id='query' ngModel>
+    <button class="btn btn-primary mb-3" type="submit">Get News</button>
+</form>
