@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { TicTacService } from '../tictac.service';
 
@@ -7,8 +7,9 @@ import { TicTacService } from '../tictac.service';
   templateUrl: './score-card.component.html',
   styleUrls: ['./score-card.component.css']
 })
-export class ScoreCardComponent implements OnInit {
+export class ScoreCardComponent implements OnInit, OnDestroy {
 
+  turnOf = 'player1'
   player1 = 'player1'
   player2 = 'player2'  
   p1_score = 0
@@ -17,6 +18,7 @@ export class ScoreCardComponent implements OnInit {
   playerNameReceiver: Subscription
   playerWinnerReceiver: Subscription
   gameResetObserver: Subscription
+  turnOfTracker: Subscription
 
   constructor(private tictacservice: TicTacService) { }
 
@@ -30,5 +32,13 @@ export class ScoreCardComponent implements OnInit {
       this.gamesPlayed++
     })
     this.gameResetObserver = this.tictacservice.gameReset.subscribe(bool=>{this.p1_score = this.p2_score = this.gamesPlayed = 0})
+    this.turnOfTracker = this.tictacservice.turnOf.subscribe(response=>{this.turnOf = response}) 
+  }
+
+  ngOnDestroy(): void {
+    this.gameResetObserver.unsubscribe()
+    this.playerNameReceiver.unsubscribe()
+    this.playerWinnerReceiver.unsubscribe()
+    this.turnOfTracker.unsubscribe()
   }
 }

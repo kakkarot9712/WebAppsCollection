@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Subject } from "rxjs";
+import { BehaviorSubject, Subject } from "rxjs";
 
 @Injectable({providedIn:'root'})
 export class TicTacService {
@@ -22,6 +22,7 @@ export class TicTacService {
     playerWinner = new Subject<string>()
     gameStatus = new Subject<boolean>()
     gameReset = new Subject<boolean>()
+    turnOf = new BehaviorSubject<string>(null)
 
     isWinner(gridState: number[]){
         for (let combination of this.winningCombo) {

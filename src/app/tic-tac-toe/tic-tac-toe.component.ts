@@ -39,12 +39,14 @@ export class TicTacToeComponent implements OnInit {
         this.restartGame()
         this.tictacservice.gameReset.next(true)
         this.tictacservice.gameStatus.next(false)
+        this.tictacservice.turnOf.next(null) 
     }
 
     restartGame(){
         this.movesPlayed = 0
         this.markergrid = [0, 0, 0, 0, 0, 0, 0, 0, 0]
         this.turnOf = this.p1_name
+        this.tictacservice.turnOf.next(this.turnOf) 
         Array.from(document.getElementsByClassName("rounded")).forEach((img: HTMLImageElement) => {
             img.src = '../assets/placeholder.png';
         });
@@ -58,6 +60,7 @@ export class TicTacToeComponent implements OnInit {
             return
         }
         this.tictacservice.playerWinner.next(player)
+        this.tictacservice.turnOf.next(null)
         this.gameStarted = false
     }
 
@@ -96,6 +99,7 @@ export class TicTacToeComponent implements OnInit {
             return
         }
         this.turnOf = (this.turnOf===this.p1_name)?this.p2_name:this.p1_name
+        this.tictacservice.turnOf.next(this.turnOf)
     }
 }
 
