@@ -1,9 +1,46 @@
-<form (ngSubmit)="submitForm(newsForm)" #newsForm='ngForm'>
-    <label for="category" class="form-label"><strong>Availabel Categories</strong></label>
-    <select name="category" class='form-select mb-3' id="category" ngModel="general" required>
-        <option *ngFor="let category of categories; let i = index" value='{{ category }}'> {{ category.toUpperCase() }} </option>
-    </select>
-    <label for="query" class="form-label"><strong>Search With Custom Query (Optional)</strong></label>
-    <input type="text" class="form-control mb-3" name="query" id='query' ngModel>
+<form (ngSubmit)="submitForm(newsForm)" #newsForm='ngForm' *ngIf="formType==='search'">
+    <div class="mb-3">
+        <label for="query" class="form-label"><strong>Enter the query to search</strong></label>
+        <input type="text" class="form-control" name="query" id='query' ngModel required>
+        <p class="form-text">User can Pass multiple queries seperated by comma at once. (sports, kohli)</p>
+    </div>
+    <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="clearDefaultQuery" name="clearDefaultQuery" ngModel>
+        <label class="form-check-label" for="clearDefaultQuery">Clear Default Queries</label>
+    </div>
+    <p class="form-text mb-3">By default several predefined params will be passed along with custom params to make sure 
+        results will be relevent to india. Unchecking that option will wipe predefined params, 
+        and that will search news all over the world.</p>
+    <div class="mb-3">
+        <label for="searchin" class="form-label"><strong>Search Scope</strong></label>
+        <select name="searchIn" class='form-select' id="searchIn" ngModel="description" required>
+            <option *ngFor="let scope of searchScopes; let i = index" [value]='scope'> {{ scope.toUpperCase() }} </option>
+        </select>
+        <p class="form-text">Search scopes tells API where to search for queries. There are 3 Options available. searching from title will give less results
+            but that results will be more relavent to the query searched. On the other hand searching from content will give user more results but
+            those results may not that much relavent to query searched. in description, queries will be searched from description, which will
+            give both average relevency and average number of search results.
+        </p>
+    </div>
+    <div class="mb-3">
+        <label for="sortBy" class="form-label"><strong>Sort News By</strong></label>
+        <select name="sortBy" class='form-select' id="sortBy" ngModel="popularity" required>
+            <option *ngFor="let sort of sortsBy; let i = index" [value]='sort'> {{ sort.toUpperCase()==='PUBLISHEDAT'?'BY LATEST':sort.toUpperCase() }} </option>
+        </select>
+    </div>
     <button class="btn btn-primary mb-3" type="submit">Get News</button>
+</form>
+<form (ngSubmit)="submitForm(newsForm)" #newsForm='ngForm' *ngIf="formType==='top-headlines'">
+    <div class="mb-3">
+        <label for="query" class="form-label"><strong>Enter the query to search</strong></label>
+        <input type="text" class="form-control" name="query" id='query' ngModel>
+        <p class="form-text">User can Pass multiple queries seperated by comma at once. (sports, kohli)</p>
+    </div>
+    <div class="mb-3">
+        <label for="category" class="form-label"><strong>Available Categories</strong></label>
+        <select name="category" class='form-select' id="category" ngModel="general" required>
+            <option *ngFor="let category of categories; let i = index" [value]='category'> {{ category.toUpperCase() }} </option>
+        </select>
+    </div>
+    <button class="btn btn-primary" type="submit">Get News</button>
 </form>

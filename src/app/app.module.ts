@@ -14,6 +14,9 @@ import { PlayernameformComponent } from './tic-tac-toe/playernameform/playername
 import { ScoreCardComponent } from './tic-tac-toe/score-card/score-card.component';
 import { NewsFeedComponent } from './news-feed/news-feed.component';
 import { NewsFeedFormComponent } from './news-feed/news-feed-form/news-feed-form.component';
+import { NewsFeedSearchComponent } from './news-feed/news-feed-search/news-feed-search.component';
+import { NewsFeedTopHeadlinesComponent } from './news-feed/news-feed-top-headlines/news-feed-top-headlines.component';
+import { NewsFeedCardComponent } from './news-feed/news-feed-card/news-feed-card.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +30,9 @@ import { NewsFeedFormComponent } from './news-feed/news-feed-form/news-feed-form
     ScoreCardComponent,
     NewsFeedComponent,
     NewsFeedFormComponent,
+    NewsFeedSearchComponent,
+    NewsFeedTopHeadlinesComponent,
+    NewsFeedCardComponent,
   ],
   imports: [
     BrowserModule,

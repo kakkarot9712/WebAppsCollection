@@ -1,5 +1,6 @@
 export class NewsModel {
     constructor(
+        public totalResults: number,
         public author : string, 
         public title : string, 
         public description : string, 
