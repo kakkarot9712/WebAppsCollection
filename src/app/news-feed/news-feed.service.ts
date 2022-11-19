@@ -16,40 +16,45 @@ interface sourceModel {
 @Injectable({providedIn:'root'})
 
 export class NewsFeedService{
-    private recommanded = ['general', 'business', 'entertainment', 'health', 'science', 'sports', 'technology']
-    private sortBy = ['relevancy', 'popularity', 'publishedAt']
-    private searchIn = ['title', 'description', 'content']
+    private recommanded = ['news', 'sport', 'tech', 'world', 'finance','politics', 'business', 'economics', 'entertainment', 'beauty', 'travel', 'music', 'food', 'science', 'gaming', 'energy']
+    private sortBy = ['relevancy', 'rank', 'date']
+    private searchIn = ['title', 'summary']
 
     TopData = new Subject<{category: string, query: string}>()
     searchData = new Subject<{searchIn: string, sortBy: string, query: string}>()
 
     constructor(private http: HttpClient){}
     fetchNew(searchIn: string, sortBy: string, pageNo: number, query: string){
-        return this.http.get(`https://newsapi.org/v2/everything`, {
+        return this.http.get(`https://api.newscatcherapi.com/v2/search`, {
+            headers: {
+                'x-api-key': environment.newsapi
+            },
             params: new HttpParams().appendAll({
                 q: query,
-                searchIn: searchIn,
-                language: 'en',
-                pageSize: 15,
+                search_in: searchIn,
+                lang: 'en',
+                page_size: 15,
                 page: pageNo,
-                from: '2022-11-11',
-                to:'2022-11-18',
-                sortBy: sortBy,
-                excludeDomains: 'visual.ly',
-                apiKey: environment.newsapi
+                ranked_only: true,
+                sort_by: sortBy,
+                not_sources: 'dailymail.co.uk'
             })
         })
     }
 
     fetchTop(category: string, pageNo: number, query: string){
-        return this.http.get(`https://newsapi.org/v2/top-headlines`, {
+        return this.http.get('https://api.newscatcherapi.com/v2/latest_headlines', {
+            headers: {
+                'x-api-key': environment.newsapi
+            },
             params: new HttpParams().appendAll({
-                q: query,
-                category: category,
-                country: 'in',
+                topic: category,
+                countries: ['IN','US'],
+                lang: 'en',
                 page: pageNo,
-                pageSize: 15,
-                apiKey: environment.newsapi
+                page_size: 15,
+                ranked_only: true,
+                not_sources: 'dailymail.co.uk'
             })
         })
     }

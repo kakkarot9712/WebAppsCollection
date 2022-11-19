@@ -1,3 +1,21 @@
+<div class="modal" (click)="dismissModal($event)" tabindex="-1" #modal2>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirmation</h5>
+            </div>
+            <div class="modal-body">
+                {{ confirmationmsg }}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary mx-2" (click)="confirmResp(true)">Yes</button>
+                <button type="button" class="btn btn-primary mx-2" (click)="confirmResp(false)">Go back</button>
+            </div>
+        </div>
+    </div>
+</div>
+<h1>Welcome To Tic-Tac-Toe Game</h1>
+<hr>
 <div class="container col-md-5">
     <app-playernameform></app-playernameform>
 </div>
@@ -8,10 +26,13 @@
     <div class="row" *ngFor="let num of DUMMY_ARRAY; let i = index">
         <div class="col border border-dark w-100 cell" *ngFor="let num of DUMMY_ARRAY; let j = index">
             <div class="text-center m-1">
-                <img src="../assets/placeholder.png" class="rounded img-fluid" alt="cross" (click)="markdown($event)" id={{(3*i)+j}}>
+                <img src="../assets/placeholder.png" class="rounded img-fluid" alt="cross" (click)="markdown($event)"
+                    id={{(3*i)+j}}>
             </div>
         </div>
     </div>
-    <button class="btn btn-primary my-3 mx-2" type="button" (click)="switchGameStateHandler()">{{gameStarted?'Stop Game':'Start Game'}}</button>
+    <button class="btn btn-primary my-3 mx-2" type="button" (click)="switchGameStateHandler()">
+        {{gameStarted?'Stop Game':'Start Game'}} 
+    </button>
     <button class="btn btn-primary my-3" (click)="resetAll()" [disabled]="gameStarted">End Game</button>
 </div>

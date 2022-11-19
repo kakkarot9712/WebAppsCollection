@@ -40,7 +40,7 @@ export class NewsFeedSearchComponent implements OnInit, OnDestroy {
   fetchTop(category: string, query: string){
     this.newsservice.fetchTop(category, this.pageVisited, query).subscribe(response => {
       this.newses = response['articles']
-      this.totalResults = response['totalResults']
+      this.totalResults = response['total_hits']
       this.resultsFetched = true
     })
   }
@@ -50,7 +50,7 @@ export class NewsFeedSearchComponent implements OnInit, OnDestroy {
     query: string){
     this.newsservice.fetchNew(searchIn, sortBy, this.pageVisited, query).subscribe((response)=>{
       this.newses = response['articles']
-      this.totalResults = response['totalResults']
+      this.totalResults = response['total_hits']
       this.resultsFetched = true
     })
   }
@@ -66,6 +66,5 @@ export class NewsFeedSearchComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    console.log('dest')
   }
 }

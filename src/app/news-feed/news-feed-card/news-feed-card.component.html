@@ -1,16 +1,16 @@
 <div class="col" *ngIf="news">
     <div class="card h-100">
         <div class="card-header">
-            <small class="text-muted">Publisher: {{ news.source.name }}</small>
+            <small class="text-muted">Publisher: {{ news.rights }}</small>
         </div>
-        <!-- <img src='{{ news.urlToImage }}' class="card-img-top max-width: 10rem" alt="visual-representation"> -->
+        <img [src]='news.media' class="card-img-top" alt="visual-representation">
         <div class="card-body">
             <h5 class="card-title">{{ news.title }}</h5>
-            <p class="card-text">{{ news.description }}</p>
-            <a [href]="news.url" target="_blank"><button class="btn btn-primary">Read More</button></a>
+            <p class="card-text">{{ news.excerpt }}</p>
+            <a [href]="news.link" target="_blank"><button class="btn btn-primary">Read More</button></a>
         </div>
         <div class="card-footer">
-            <small class="text-muted">News Published : {{ getTime(news.publishedAt) }}</small>
+            <small class="text-muted">News Published : {{ getTime(news.published_date) }}</small>
         </div>
     </div>
 </div>

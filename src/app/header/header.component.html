@@ -1,4 +1,4 @@
-<nav class="navbar navbar-dark navbar-expand-lg bg-dark user-select-none">
+<nav class="navbar navbar-dark navbar-expand-lg bg-dark user-select-none fixed-top">
     <div class="container-fluid">
       <a class="navbar-brand" [routerLink]="['home']">Demo Web Apps</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,6 +19,11 @@
               <li><a class="dropdown-item" [routerLink]="['newsfeed']">News Feed</a></li>
             </ul>
           </li>
+          <!-- <li class="nav-item">
+            <a class="nav-link" role="button" aria-expanded="false">
+              Current Location - {{ currentLocation }}
+            </a>
+          </li> -->
         </ul>
       </div>
     </div>

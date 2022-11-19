@@ -1,13 +1,20 @@
-import { IfStmt } from '@angular/compiler';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, Renderer2 } from '@angular/core';
+import { asyncScheduler, Subject, Subscription } from 'rxjs';
+import { __makeTemplateObject } from 'tslib';
 import { TicTacService } from './tictac.service';
 
 @Component({
   selector: 'app-tic-tac-toe',
   templateUrl: './tic-tac-toe.component.html',
+  styleUrls: ['./tic-tac-toe.component.css']
 })
+
 export class TicTacToeComponent implements OnInit {
+
+    @ViewChild('modal2')modal: ElementRef
     
+    confirmationmsg: string = null
+    confirmationType: string = null
     DUMMY_ARRAY = [0, 0, 0]
 
     // 0 is empty cell (yet to select)
@@ -23,7 +30,7 @@ export class TicTacToeComponent implements OnInit {
     p2_name = 'player2'
     turnOf = 'player1'
     
-    constructor(private tictacservice: TicTacService) { }
+    constructor(private tictacservice: TicTacService, private renderer: Renderer2) { }
     ngOnInit(): void {
         this.tictacservice.playerNameProvider.subscribe((names)=>{
             this.p1_name = names.p1,
@@ -34,12 +41,24 @@ export class TicTacToeComponent implements OnInit {
         })
     }
 
+    openModal(){
+        this.renderer.setStyle(this.modal.nativeElement, 'display', 'flex')  
+    }
+    
+    closeModal(){
+        this.renderer.setStyle(this.modal.nativeElement, 'display', 'none')  
+    }
+
+    dismissModal(event: Event){
+        if(event.target===this.modal.nativeElement){
+          this.renderer.setStyle(this.modal.nativeElement, 'display', 'none')
+        }
+    }
+    
     resetAll(){
-        alert("ending game!, score will be resetted and now you can also change the player names")
-        this.restartGame()
-        this.tictacservice.gameReset.next(true)
-        this.tictacservice.gameStatus.next(false)
-        this.tictacservice.turnOf.next(null) 
+        this.openModal()
+        this.confirmationType = 'reset'
+        this.confirmationmsg = 'Are you sure? Ending game will reset everything!' 
     }
 
     restartGame(){
@@ -54,23 +73,55 @@ export class TicTacToeComponent implements OnInit {
 
     declareWinner(player: string){
         if (player === null){
-            alert('No more moves Possible, game is tied!')
-            console.log('No winner is found!')
+            this.tictacservice.showAlert.next({
+                alertType: 'warning',
+                alertmsg: 'No more moves Possible, game is tied!'
+            })
             this.gameStarted = false
             return
         }
+        
+        this.tictacservice.showAlert.next({
+            alertType: 'success',
+            alertmsg: `${player} has won the match!, ${player} has awarded 1 point`
+        })
+
         this.tictacservice.playerWinner.next(player)
         this.tictacservice.turnOf.next(null)
         this.gameStarted = false
     }
 
+    confirmResp(bool: boolean){
+        if(bool){
+            if(this.confirmationType === 'stop'){
+                this.restartGame()
+                this.gameStarted = !this.gameStarted
+                this.tictacservice.gameStatus.next(true)
+            }
+
+            if(this.confirmationType === 'reset'){
+                this.tictacservice.showAlert.next({
+                    alertType: 'warning',
+                    alertmsg: "ending game!, score will be resetted and now you can also change the player names"
+                })
+                this.restartGame()
+                this.tictacservice.gameReset.next(true)
+                this.tictacservice.gameStatus.next(false)
+                this.tictacservice.turnOf.next(null)
+            }
+        }
+
+        this.closeModal()
+        this.confirmationmsg = null
+        this.confirmationType = null
+    }
+
     switchGameStateHandler(){
         if(this.gameStarted){
-            let isCofirmed = confirm("Are you sure? Enfing game will reset tic-tac-toe grid")
-            console.log(isCofirmed)
-            if (!isCofirmed) {
-                return
-            }
+            this.openModal()
+            this.confirmationType = 'stop'
+            this.confirmationmsg = "Are you sure? Ending game will reset tic-tac-toe grid"
+            return
         }
         this.restartGame()
         this.gameStarted = !this.gameStarted
@@ -79,7 +130,10 @@ export class TicTacToeComponent implements OnInit {
 
     markdown(event: Event){
         if (!this.gameStarted){
-            alert("Game is not started! start the game to start playing")
+            this.tictacservice.showAlert.next({
+                alertType: 'warning',
+                alertmsg: "Game is not started! start the game to start playing"
+            })
             return
         }
         if (this.markergrid[event.target['id']] !== 0){
@@ -92,6 +146,7 @@ export class TicTacToeComponent implements OnInit {
         if (this.movesPlayed>=5){
             if(this.tictacservice.isWinner(this.markergrid)){
                 this.declareWinner(this.turnOf)
+                return
             }
         }
         if(this.movesPlayed === 9){
@@ -102,4 +157,3 @@ export class TicTacToeComponent implements OnInit {
         this.tictacservice.turnOf.next(this.turnOf)
     }
 }
-

@@ -1,3 +1,5 @@
+<h1>Top-Headlines Search</h1>
+<hr>
 <app-news-feed-form></app-news-feed-form>
 <br>
 <hr>
@@ -5,6 +7,7 @@
 <div class="row row-cols-1 row-cols-md-3 g-4 mb-3">
     <app-news-feed-card *ngFor="let news of newses" [newsData]="news"></app-news-feed-card>
 </div>
-<button class="btn btn-primary mx-2" (click)="onPrevPage()" type="button" *ngIf="resultsFetched && pageVisited > 1">Previous Page</button>
-<button class="btn btn-primary mx-2" (click)="onNextPage()" type="button" *ngIf="resultsFetched && (pageVisited*15) < totalResults">Next Page</button>
-<br>
+<button class="btn btn-primary mx-2 my-2" (click)="onPrevPage()" type="button" *ngIf="resultsFetched && pageVisited > 1">Previous Page</button>
+<button class="btn btn-primary mx-2 my-2" (click)="onNextPage()" type="button" *ngIf="resultsFetched && (pageVisited*15) < totalResults">Next Page</button>
+<hr>
+<h5>This part of web app is powered by <a href="https://newscatcherapi.com/" class="link-primary" target="_blank">&lt;/newscatcher&gt; </a></h5>

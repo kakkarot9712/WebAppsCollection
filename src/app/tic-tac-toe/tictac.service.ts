@@ -23,6 +23,8 @@ export class TicTacService {
     gameStatus = new Subject<boolean>()
     gameReset = new Subject<boolean>()
     turnOf = new BehaviorSubject<string>(null)
+    showAlert = new Subject<{alertType: string, alertmsg: string}>()
+    showModal = new Subject<boolean>()
 
     isWinner(gridState: number[]){
         for (let combination of this.winningCombo) {

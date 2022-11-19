@@ -30,7 +30,7 @@ export class NewsFeedTopHeadlinesComponent implements OnInit {
   fetchTop(category: string, query: string){
     this.newsservice.fetchTop(category, this.pageVisited, query).subscribe(response => {
       this.newses = response['articles']
-      this.totalResults = response['totalResults']
+      this.totalResults = response['total_hits']
       this.resultsFetched = true
     })
   }

@@ -17,6 +17,9 @@ import { NewsFeedFormComponent } from './news-feed/news-feed-form/news-feed-form
 import { NewsFeedSearchComponent } from './news-feed/news-feed-search/news-feed-search.component';
 import { NewsFeedTopHeadlinesComponent } from './news-feed/news-feed-top-headlines/news-feed-top-headlines.component';
 import { NewsFeedCardComponent } from './news-feed/news-feed-card/news-feed-card.component';
+import { FooterComponent } from './footer/footer.component';
+import { AlertComponent } from './shared/alert/alert.component';
+
 
 @NgModule({
   declarations: [
@@ -33,6 +36,8 @@ import { NewsFeedCardComponent } from './news-feed/news-feed-card/news-feed-card
     NewsFeedSearchComponent,
     NewsFeedTopHeadlinesComponent,
     NewsFeedCardComponent,
+    FooterComponent,
+    AlertComponent,
   ],
   imports: [
     BrowserModule,
