@@ -1,6 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild, Renderer2 } from '@angular/core';
-import { asyncScheduler, Subject, Subscription } from 'rxjs';
-import { __makeTemplateObject } from 'tslib';
+import { SharedService } from '../shared/shared.service';
 import { TicTacService } from './tictac.service';
 
 @Component({
@@ -30,7 +29,7 @@ export class TicTacToeComponent implements OnInit {
     p2_name = 'player2'
     turnOf = 'player1'
     
-    constructor(private tictacservice: TicTacService, private renderer: Renderer2) { }
+    constructor(private tictacservice: TicTacService, private renderer: Renderer2, private sharedservice: SharedService) { }
     ngOnInit(): void {
         this.tictacservice.playerNameProvider.subscribe((names)=>{
             this.p1_name = names.p1,
@@ -73,7 +72,7 @@ export class TicTacToeComponent implements OnInit {
 
     declareWinner(player: string){
         if (player === null){
-            this.tictacservice.showAlert.next({
+            this.sharedservice.showAlert.next({
                 alertType: 'warning',
                 alertmsg: 'No more moves Possible, game is tied!'
             })
@@ -81,7 +80,7 @@ export class TicTacToeComponent implements OnInit {
             return
         }
         
-        this.tictacservice.showAlert.next({
+        this.sharedservice.showAlert.next({
             alertType: 'success',
             alertmsg: `${player} has won the match!, ${player} has awarded 1 point`
         })
@@ -100,7 +99,7 @@ export class TicTacToeComponent implements OnInit {
             }
 
             if(this.confirmationType === 'reset'){
-                this.tictacservice.showAlert.next({
+                this.sharedservice.showAlert.next({
                     alertType: 'warning',
                     alertmsg: "ending game!, score will be resetted and now you can also change the player names"
                 })
@@ -130,7 +129,7 @@ export class TicTacToeComponent implements OnInit {
 
     markdown(event: Event){
         if (!this.gameStarted){
-            this.tictacservice.showAlert.next({
+            this.sharedservice.showAlert.next({
                 alertType: 'warning',
                 alertmsg: "Game is not started! start the game to start playing"
             })

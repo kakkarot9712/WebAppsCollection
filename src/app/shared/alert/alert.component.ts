@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { TicTacService } from 'src/app/tic-tac-toe/tictac.service';
+import { SharedService } from '../shared.service';
 
 @Component({
   selector: 'app-alert',
@@ -10,10 +10,10 @@ export class AlertComponent implements OnInit {
   @Input('msg') alertmsg: string
   @Input() alertType: string
 
-  constructor(private tictacservice: TicTacService) { }
+  constructor(private sharedservice: SharedService) { }
 
   ngOnInit(): void {
-    this.tictacservice.showAlert.subscribe((response)=>{
+    this.sharedservice.showAlert.subscribe((response)=>{
       this.alertType = response.alertType
       this.alertmsg = response.alertmsg
       setTimeout(()=>{

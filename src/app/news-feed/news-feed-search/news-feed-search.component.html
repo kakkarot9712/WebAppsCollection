@@ -1,7 +1,7 @@
 <h1>Custom News Search</h1>
 <hr>
 <app-news-feed-form></app-news-feed-form>
-<hr>
+<hr *ngIf="resultsFetched">
 <h1 *ngIf="resultsFetched" class="mb-3">Showing Results {{ (pageVisited*15) - 14 }} - {{ (pageVisited*15) < totalResults?(pageVisited*15):totalResults }} of {{ totalResults }} results</h1>
 <div class="row row-cols-1 row-cols-md-3 g-4 mb-3" >
     <app-news-feed-card *ngFor="let news of newses" [newsData]="news"></app-news-feed-card>

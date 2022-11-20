@@ -1,21 +1,22 @@
-import { IfStmt } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { SharedService } from 'src/app/shared/shared.service';
 import { NewsFeedService } from '../news-feed.service';
 
 @Component({
   selector: 'app-news-feed-form',
   templateUrl: './news-feed-form.component.html',
+  styleUrls: ['./news-feed-form.component.css']
 })
+
 export class NewsFeedFormComponent implements OnInit {
   categories: string[]
   searchScopes: string[]
   sortsBy: string[]
   formType: string = 'top-headlines'
 
-  constructor(private newsservice: NewsFeedService, private route: ActivatedRoute) { 
-  }
+  constructor(private newsservice: NewsFeedService, private route: ActivatedRoute, private sharedservice: SharedService) {}
 
   ngOnInit(): void {
     this.searchScopes = this.newsservice.getScopes()
@@ -27,7 +28,14 @@ export class NewsFeedFormComponent implements OnInit {
   }
 
   submitForm(newsForm: NgForm){
-    console.log(newsForm)
+    if(newsForm.invalid){
+      this.sharedservice.showAlert.next({
+        alertType:'danger',
+        alertmsg:'Some of provided Inputs are nor valid! check your inputs!'
+      })
+      return
+    }
+
     let queries = 'india'
     if(this.formType==='search'){
       if(newsForm.value.clearDefaultQuery){

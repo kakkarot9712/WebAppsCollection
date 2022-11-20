@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms'
+import { SharedService } from 'src/app/shared/shared.service';
 import { TicTacService } from '../tictac.service';
 
 @Component({
@@ -10,7 +11,7 @@ import { TicTacService } from '../tictac.service';
 export class PlayernameformComponent implements OnInit {
   gameStarted = false
   @ViewChild('modal')modal: ElementRef
-  constructor(private tictacservice: TicTacService, private renderer: Renderer2) { }
+  constructor(private tictacservice: TicTacService, private renderer: Renderer2, private sharedservice: SharedService) { }
 
   ngOnInit(): void {
     this.tictacservice.gameStatus.subscribe((bool)=>{
@@ -35,7 +36,7 @@ export class PlayernameformComponent implements OnInit {
   onSubmitHandler(nameForm: NgForm){
     if(this.gameStarted){
 
-      this.tictacservice.showAlert.next({
+      this.sharedservice.showAlert.next({
         alertType: 'danger',
         alertmsg: 'name changing is not allowed after game is started!, end the game to change names!'
       })
@@ -52,7 +53,7 @@ export class PlayernameformComponent implements OnInit {
     }
     
     else{
-      this.tictacservice.showAlert.next({
+      this.sharedservice.showAlert.next({
         alertType: 'danger',
         alertmsg: 'invalid input!'
       })
