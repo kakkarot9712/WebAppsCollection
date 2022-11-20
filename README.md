@@ -16,6 +16,12 @@ This Web app will allow 2 players to play Tic-Tac-Toe game. This web app support
 3) News-Feed :-
 This web app will let users fetch news using newscatcher api and after that user can read news summary, user can open website if he/she he is interested in original    article. This web apps can fetch Latest headlines in multiple categories and If users are interested in specific type on news. user can search news with several        supported options like searching scope and sort method. This part of the website is powered by [news-catcher API](https://newscatcherapi.com/)
 
+## Demo
+
+Here is the [Demo of website](https://webappscollection.web.app/home) 
+<br>
+Deployed using [Firebase](https://firebase.google.com/)
+
 ## Built With
 
 * <img src="https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white" />
