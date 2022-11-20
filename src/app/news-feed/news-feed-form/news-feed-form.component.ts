@@ -31,7 +31,7 @@ export class NewsFeedFormComponent implements OnInit {
     if(newsForm.invalid){
       this.sharedservice.showAlert.next({
         alertType:'danger',
-        alertmsg:'Some of provided Inputs are nor valid! check your inputs!'
+        alertmsg:'Some of provided Inputs are not valid! check your inputs!'
       })
       return
     }
