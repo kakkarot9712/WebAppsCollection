@@ -5,7 +5,7 @@ One Website Covering Several Small Web Apps
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.1.
 
 ## Description
-This website holds all the small web apps whhich is there only for single purpose. This website consist of 3 Web apps curently
+This website holds all the small web apps made by me. This website currently consist of 3 Web apps
 
 1) Wall-clock :-
 As the name suggest that web app shows time in typical wall-clock style.
@@ -14,7 +14,7 @@ As the name suggest that web app shows time in typical wall-clock style.
 This Web app will allow 2 players to play Tic-Tac-Toe game. This web app supports defining custom player names, web app will store score of both players
 
 3) News-Feed :-
-This web app will let users fetch news using newscatcher api and after that user can read news summary, user can open website if he/she he is interested in original    article. This web apps can fetch Latest headlines in multiple categories and If users are interested in specific type on news. user can search news with several        supported options like searching scope and sort method. This part of the website is powered by [news-catcher API](https://newscatcherapi.com/)
+This web app will let users fetch news using newscatcher api and after that user can read news summary, user can open website if he/she is interested in original article. This web app can fetch Latest headlines in multiple selectable categories and If users are interested in specific type of news. user can search news using custom keywords several along with extra options to choose from like searching scope and sort method. This part of the website is powered by [news-catcher API](https://newscatcherapi.com/)
 
 ## Demo
 
