@@ -5,41 +5,46 @@
 }
 
 .clock-container {
-    width: 35rem;
+    width: 70%;
+    position: relative;
     margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: cwn;
 }
 
 .dial {
-    width: 100%;
+    width: 80%;
+    max-width: 600px;
 }
 
 .niddle {
     display: inline-block;
-    position: relative;
+    position: absolute;
     background-color: black;
     transform-origin: bottom center;
 }
 
 .hour {
-    bottom: 32.4rem;
-    left: 17.15rem;
-    width: 0.7rem;
-    height: 10rem;
+    bottom: 50.5%;
+    left: 49%;
+    width: 1.3%;
+    height: 27%;
     border-radius: 0.7rem;
 }
 
 .minute {
-    bottom: 32.4rem;
-    left: 16.35rem;
-    width: 0.4rem;
-    height: 13rem;
+    bottom: 50.5%;
+    left: 50%;
+    width: 0.8%;
+    height: 35%;
     border-radius: 0.4rem;
 }
 
 .second {
-    bottom: 32.4rem;
-    left: 16.2rem;
-    width: 0.2rem;
-    height: 15rem;
+    bottom: 50.5%;
+    left: 50%;
+    width: 0.4%;
+    height: 40%;
     border-radius: 0.2rem;
 }
